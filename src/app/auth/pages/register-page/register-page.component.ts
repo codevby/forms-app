@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 
 // import * as customValidators from '../../../shared/validators/validators';
 import { ValidatorsService } from '../../../shared/services/validators.service';
+import { EmailValidatorService } from '../../../shared/validators/email-validator.service';
 
 @Component({
   selector: 'app-register-page',
@@ -22,7 +23,7 @@ export class RegisterPageComponent {
 
   public myForm: FormGroup = this.fb.group({
     name:  [ '', [ Validators.required, Validators.pattern( this.validatorService.firstNameAndLastnamePattern ) ]],
-    email: [ '', [ Validators.required, Validators.pattern( this.validatorService.emailPattern ) ]],
+    email: [ '', [ Validators.required, Validators.pattern( this.validatorService.emailPattern ) ], [ new EmailValidatorService() ]],
     username:  [ '', [ Validators.required, this.validatorService.cantBeStrider ]],
     password:  [ '', [ Validators.required, Validators.minLength(6) ]],
     password2: [ '', [ Validators.required, Validators.minLength(6) ]]
